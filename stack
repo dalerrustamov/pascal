@@ -1,1 +1,112 @@
-Hello world
+#pragma once
+#include <iostream>
+using namespace std;
+
+class BasicError
+{
+};
+
+enum stacktype { Full, Empty };
+
+class StackError : public BasicError
+{
+public:
+	stacktype error;
+	StackError(stacktype errors)
+	{
+		error = errors;
+	}
+
+};
+
+template<class t>
+class Stack
+{
+private:
+	t dataarray[5];
+	int top;
+	int stack;
+public:
+
+	Stack()
+	{
+		top = 0;
+		for (int x = 0; x < 5; x++)
+		{
+			dataarray[x] = NULL;
+		}
+	}
+	Stack(int size)
+	{
+		stack = size;
+	}
+
+	void push(t item)
+	{
+		char Choice = 0;
+		try {
+			if (top == 5)
+			{
+				throw new StackError(stacktype::Full);
+			}
+			else
+			{
+				dataarray[top] = item;
+				top = top + 1;
+			}
+		}
+		catch (StackError * e)
+		{
+			if (e->error == stacktype::Full)
+			{
+				cout << "******Stack is Full******" << endl;
+				cout << "A) Throw away new item" << endl;
+				cout << "B) Throw away top item" << endl;
+				cout << "C) Throw away bottom item" << endl;
+				cout << "Please enter a choice ";
+				cin >> Choice;
+				switch (Choice)
+				{
+				case 'A': case 'a':
+				{
+
+				}
+				break;
+				case 'B': case 'b':
+				{
+					dataarray[top - 1] = item;
+				}
+				break;
+				case 'C': case 'c':
+				{
+					RemoveItemFromBottom();
+					dataarray[top] = item;
+					top = top + 1;
+
+				}
+				}
+			}
+		}
+	}
+
+	t Pop()
+	{
+		t Temp;
+		if (top > 0)
+		{
+			Temp = dataarray[top - 1];
+			top--;
+			return Temp;
+		}
+		else
+		{
+			throw new StackError(stacktype::Empty);
+		}
+	}
+
+	bool empty()
+	{
+		return !top;
+	}
+
+};
