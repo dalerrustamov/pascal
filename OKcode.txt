@@ -1,0 +1,29 @@
+var x,y,z:integer; 
+    a,b,c:boolean;
+
+procedure Average(p1,p2,p3:integer;var p4:integer);
+
+var sum:integer;    
+    done:boolean;
+
+begin
+    a:=true;
+    sum:=p1+p2+p3;  
+    p4:=sum/3;
+end;
+
+var w:boolean;
+
+function abs(p1:integer):integer;
+
+var local:integer;
+    what:boolean; 
+
+begin    
+end;
+
+var kig:integer; 
+
+begin  
+     Average (5,6,7,kig)
+end.
